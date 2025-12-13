@@ -1,10 +1,8 @@
 # Import Modules and Libraries
 # =======================================
-import os; import sys; import subprocess;
-import time; import datetime as dt;
-import socket; import requests;
+import os; import subprocess;
+import time; import requests;
 import termcolor; import colorama;
-import base64; from datetime import datetime;
 from termcolor import colored, cprint;
 colorama.init();
 # =======================================
@@ -50,8 +48,8 @@ class client():
         input(">> Press Enter if You have Read, Understand, and Agree to the above Rule Set");
         
     def banner(self):
-        print(""); print(colored("Welcome to The BlackHole Messenging Application","magenta","on_black"));
-        print(colored(">> Press Enter to Join a Room or CTRL+C to Quit","magenta","on_black")); print("");
+        print(""); print(colored("Welcome to The BlackHole","magenta","on_black"));
+        print(colored(">> Press Enter to Start or CTRL+C to Quit","magenta","on_black")); print("");
         input("");
         
     def encrypt(self,DATA):
@@ -66,11 +64,20 @@ class client():
         for x, _ in enumerate(content):content[x]=str(content[x]);
         content=' '.join(content); return str(content[::-1]);
         
+    def decrypt(self,DATA):
+        d=DATA[::-1]; d=d.split(' ');
+        for x, _ in enumerate(d):d[x]=chr(int(d[x]));
+        return ''.join(d);
+        
     def join(self):
         print(colored("=============JOIN============","green","on_black"));
-        url=input("URL (COMPRESSED REV.B64 FORMAT) : "); passwd=input("PASSWORD : ");
-        enkey=input("KEY : "); self.host=url; self.password=passwd; self.key=enkey;
-     
+        url=input("URL (REV.ASCII FORMAT) : "); passwd=input("PASSWORD : ");
+        enkey=input("KEY : "); revurl=url[::-1]; revurl=revurl.split(' ');
+        for x, _ in enumerate(revurl):revurl[x]=chr(int(revurl[x]));
+        revurl=''.join(revurl); self.host=revurl;
+        self.password=passwd; self.key=enkey;
+        
+        
     def send(self,COMMAND,DATA):
         url=self.host;
         data={
@@ -83,7 +90,7 @@ class client():
         try:
             response=requests.post(url,json=data); print("");
             content=str(response.json());
-            print(colored(f"\n {content}","magenta","on_black"));
+            print(colored(f"\n {self.decrypt(content)}","magenta","on_black"));
         except:print(colored("ERROR","red","on_black"));
     
     def main(self):

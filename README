@@ -8,7 +8,7 @@ Instructions
 1. Download and extract the repository files
 2. For Linux users, install the requirements using 'sudo pipx install -r requirements'
 3. Launch BlackHole software
-4. Provide the chatserver URL, password, and encryption key when prompted
+4. Provide the chatroom URL, password, and encryption key when prompted
 5. Chat!
 6. Note : As real time / live communications are still in development, please press 'enter' every so often in order to refresh messages displayed
 

@@ -1,0 +1,5 @@
+colorama
+termcolor
+requests
+base64
+socket

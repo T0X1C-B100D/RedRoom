@@ -111,7 +111,7 @@ class client():
         url=input("URL (REV.ASCII FORMAT) : "); passwd=input("PASSWORD : ");
         enkey=input("KEY : "); revurl=url[::-1]; revurl=revurl.split(' ');
         for x, _ in enumerate(revurl):revurl[x]=chr(int(revurl[x]));
-        revurl=''.join(revurl); print(revurl); self.host=revurl;
+        revurl=''.join(revurl); self.host=revurl;
         self.password=passwd; self.key=enkey;
         
         
